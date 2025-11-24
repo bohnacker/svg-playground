@@ -1,7 +1,7 @@
 <script>
   function calculatePosition(i, j) {
     // Versatz nach rechts für die einzelnen Sechsecke
-    let x = 50 + i * 100;
+    let x = i * 100;
     // Alles um 50 Pixel nach rechts
     x = x + 50;
     // Jede zweite Reihe um 50 Pixel nach rechts versetzen, wenn j ungerade ist
