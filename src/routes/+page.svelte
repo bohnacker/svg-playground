@@ -40,8 +40,8 @@
       {/each}
     {/each} -->
 
-
-<!-- 
+    <!-- "Von Hand" positionierte Sechsecke -->
+    <!-- 
     <polygon transform="translate(50 100)" points="0 -60, 50 -30, 50 30, 0 60, -50 30, -50 -30" />
     <polygon transform="translate(150 100)" points="0 -60, 50 -30, 50 30, 0 60, -50 30, -50 -30" />
     <polygon transform="translate(250 100)" points="0 -60, 50 -30, 50 30, 0 60, -50 30, -50 -30" />
