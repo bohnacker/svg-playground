@@ -1,27 +1,27 @@
 <script>
-  function calculatePosition(i, j) {
-    // Versatz nach rechts für die einzelnen Sechsecke
-    let x = i * 100;
-    // Alles um 50 Pixel nach rechts
-    x = x + 50;
-    // Jede zweite Reihe um 50 Pixel nach rechts versetzen, wenn j ungerade ist
-    if (j % 2 === 1) {
+  function calculatePosition(xi, yi) {
+    // xi (eine Zahl von 0 bis 10) wird in Pixel umgerechnet
+    let x = xi * 100;
+    // yi (eine Zahl von 0 bis 9) is vor allem für die vertikale Positionierung zuständig,
+    // wird aber auch für die horizontale Versetzung jeder zweiten Reihe gebraucht.
+    // Jede zweite Reihe um 50 Pixel nach rechts versetzen, wenn yi ungerade ist
+    if (yi % 2 === 1) {
       x = x + 50;
     }
-    // Vertikale Positionierung
-    const y = 100 + j * 90;
-    return { x: x, y: y };
+    // yi benutzen, um die vertikale Positionierung zu berechnen
+    const y = yi * 90;
+    // Rückgabe eines Strings, der die Koordinaten im Format "x y" enthält. Dieser kann direkt im translate() verwendet werden.
+    return x + " " + y;
   }
 </script>
 
-
 <svg viewbox="0 0 1000 1000" xmlns="http://www.w3.org/2000/svg" stroke-linejoin="round" stroke-linecap="round" stroke-width="1" fill="none" stroke="#000000">
-    <rect x="0" y="0" width="1000" height="1000" fill="#ffffff" stroke="none"/>
+    <rect x="0" y="0" width="1000" height="1000" fill="#000" stroke="none"/>
 
     <!-- Variante mit Funktionsaufruf -->
-    {#each Array(10) as _, j}
-      {#each Array(10) as _, i}
-        <polygon transform="translate({calculatePosition(i, j).x} {calculatePosition(i, j).y})" points="0 -60, 50 -30, 50 30, 0 60, -50 30, -50 -30" /> 
+    {#each Array(12) as _, yi}
+      {#each Array(11) as _, xi}
+        <polygon transform="translate({calculatePosition(xi, yi)})" points="0 -60, 50 -30, 50 30, 0 60, -50 30, -50 -30" stroke="#ffffff99"/> 
       {/each}
     {/each}
 
