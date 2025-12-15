@@ -8,10 +8,10 @@
   // let color3 = $derived(chroma.oklch(0.5, saturation, hue).hex());
   // let color4 = $derived(chroma.oklch(0.6, saturation, hue).hex());
 
-  let color1 = $derived(chroma.oklch(0.3, saturation, hue).hex());
-  let color2 = $derived(chroma.oklch(0.4, saturation, hue).hex());
-  let color3 = $derived(chroma.oklch(0.5, saturation, hue).hex());
-  let color4 = $derived(chroma.oklch(0.6, saturation, hue).hex());
+  let color1 = $derived(chroma.hsi(hue, saturation, 0.3).hex());
+  let color2 = $derived(chroma.hsi(hue, saturation, 0.4).hex());
+  let color3 = $derived(chroma.hsi(hue, saturation, 0.5).hex());
+  let color4 = $derived(chroma.hsi(hue, saturation, 0.6).hex());
 
   // Definieren der Variablen für die Hexagon-Größe, damit es reguläre Sechsecke sind
   let halfH = 60;
