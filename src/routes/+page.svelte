@@ -1,6 +1,18 @@
 <script>
   import chroma from "chroma-js";
 
+  let hue = $state(160);
+  let saturation = $state(0.2);
+  // let color1 = $derived(chroma.oklch(0.3, saturation, hue).hex());
+  // let color2 = $derived(chroma.oklch(0.4, saturation, hue).hex());
+  // let color3 = $derived(chroma.oklch(0.5, saturation, hue).hex());
+  // let color4 = $derived(chroma.oklch(0.6, saturation, hue).hex());
+
+  let color1 = $derived(chroma.oklch(0.3, saturation, hue).hex());
+  let color2 = $derived(chroma.oklch(0.4, saturation, hue).hex());
+  let color3 = $derived(chroma.oklch(0.5, saturation, hue).hex());
+  let color4 = $derived(chroma.oklch(0.6, saturation, hue).hex());
+
   // Definieren der Variablen für die Hexagon-Größe, damit es reguläre Sechsecke sind
   let halfH = 60;
   let halfW = Math.sqrt(3) * halfH / 2;
@@ -19,7 +31,26 @@
     // Rückgabe eines Strings, der die Koordinaten im Format "x y" enthält. Dieser kann direkt in translate() verwendet werden.
     return x + " " + y;
   }
+
+  function getColor(xi, yi) {
+    if ((xi % 2 === 0) && (yi % 2 === 0)) {
+      return color1;
+    } else if ((xi % 2 === 1) && (yi % 2 === 0)) {
+      return color2;
+    } else if ((xi % 2 === 0) && (yi % 2 === 1)) {
+      return color3;
+    } else {
+      return color4;
+    }
+  }
+
 </script>
+
+<input id="hue" type="range" min="0" max="360" bind:value={hue} />
+<label for="hue">Hue: {hue}</label>
+<br />
+<input id="saturation" type="range" min="0" max="1" step="0.01" bind:value={saturation} />
+<label for="saturation">Saturation: {saturation}</label>
 
 <svg
   viewbox="0 0 1000 1000"
@@ -28,7 +59,7 @@
   stroke-linecap="round"
   stroke-width="1"
   fill="none"
-  stroke="#ffffff99"
+  stroke="#fff0"
 >
   <rect x="0" y="0" width="1000" height="1000" fill="#000" stroke="none" />
 
@@ -38,6 +69,7 @@
       <polygon
         transform="translate({calculatePosition(xi, yi)})"
         points="0 -{halfH}, {halfW} -{halfH/2}, {halfW} {halfH/2}, 0 {halfH}, -{halfW} {halfH/2}, -{halfW} -{halfH/2}"
+        fill="{getColor(xi, yi)}"
       />
     {/each}
   {/each}
