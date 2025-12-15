@@ -1,5 +1,15 @@
 <script>
-  import chroma from "chroma-js";
+  import chroma from 'chroma-js';
+
+  let hue = $state(120);
+
+  // let colorScale = chroma.scale(['yellow', 'lightgreen', '008ae5']).mode('oklch');
+  let color1 = $derived(chroma.oklch(0.5, 0.2, hue));
+  let color2 = $derived(chroma.oklch(0.6, 0.2, hue + 180));
+  let color3 = $derived(chroma.oklch(0.7, 0.2, hue));
+  let color4 = $derived(chroma.oklch(0.8, 0.2, hue + 180));
+
+  // console.log(colorScale);
 
   // Definieren der Variablen für die Hexagon-Größe, damit es reguläre Sechsecke sind
   let halfH = 60;
@@ -19,7 +29,28 @@
     // Rückgabe eines Strings, der die Koordinaten im Format "x y" enthält. Dieser kann direkt in translate() verwendet werden.
     return x + " " + y;
   }
+
+  function getColor(xi, yi) {
+    if (xi % 2 === 0 && yi % 2 === 0) {
+      return color1.hex();
+    } else if (xi % 2 === 1 && yi % 2 === 0) {
+      return color2.hex();
+    } else if (xi % 2 === 0 && yi % 2 === 1) {
+      return color3.hex();
+    } else if (xi % 2 === 1 && yi % 2 === 1) {
+      return color4.hex();
+    }
+    return '#000'; // Fallback-Farbe
+  }
 </script>
+
+<input
+  type="range"
+  min="0"
+  max="360"
+  bind:value={hue}
+  style=" margin: 20px;"
+/>
 
 <svg
   viewbox="0 0 1000 1000"
@@ -38,7 +69,8 @@
       <polygon
         transform="translate({calculatePosition(xi, yi)})"
         points="0 -{halfH}, {halfW} -{halfH/2}, {halfW} {halfH/2}, 0 {halfH}, -{halfW} {halfH/2}, -{halfW} -{halfH/2}"
-      />
+        fill={getColor(xi, yi)}
+        />
     {/each}
   {/each}
   <!-- Variante mit Modulo -->
